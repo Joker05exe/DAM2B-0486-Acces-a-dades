@@ -1,0 +1,4 @@
+Hola món
+Benvinguts a la practica d'acces a dades
+Aquest fitxer sera xifrat amb el metode de Cesar
+Cada linia s'inverteix abans de xifrar-se
