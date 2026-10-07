@@ -64,7 +64,7 @@ public class GestioVideojocs {
         System.out.print("Gènere: ");
         String genere = sc.nextLine();
         System.out.print("Any de llançament: ");
-        int any = llegirEnter();
+        int any = convertirAny(sc.nextLine());
         System.out.print("Plataforma: ");
         String plataforma = sc.nextLine();
         System.out.print("Preu: ");
@@ -117,16 +117,37 @@ public class GestioVideojocs {
 
         Videojoc v = videojocs.get(index);
 
+        System.out.println("(Prem Enter per mantenir el valor actual)");
+
         System.out.print("Nou títol (" + v.getTitol() + "): ");
-        v.setTitol(sc.nextLine());
+        String text = sc.nextLine().trim();
+        if (!text.isEmpty()) {
+            v.setTitol(text);
+        }
+
         System.out.print("Nou gènere (" + v.getGenere() + "): ");
-        v.setGenere(sc.nextLine());
+        text = sc.nextLine().trim();
+        if (!text.isEmpty()) {
+            v.setGenere(text);
+        }
+
         System.out.print("Nou any de llançament (" + v.getAnyLlancament() + "): ");
-        v.setAnyLlancament(llegirEnter());
+        text = sc.nextLine().trim();
+        if (!text.isEmpty()) {
+            v.setAnyLlancament(convertirAny(text));
+        }
+
         System.out.print("Nova plataforma (" + v.getPlataforma() + "): ");
-        v.setPlataforma(sc.nextLine());
+        text = sc.nextLine().trim();
+        if (!text.isEmpty()) {
+            v.setPlataforma(text);
+        }
+
         System.out.print("Nou preu (" + v.getPreu() + "): ");
-        v.setPreu(llegirDecimal());
+        text = sc.nextLine().trim();
+        if (!text.isEmpty()) {
+            v.setPreu(convertirPreu(text));
+        }
 
         desarVideojocs(videojocs);
         System.out.println("Videojoc actualitzat correctament.");
@@ -191,13 +212,38 @@ public class GestioVideojocs {
     }
 
     private static double llegirDecimal() {
+        return convertirPreu(sc.nextLine());
+    }
+
+    // Converteix un text a preu; si no és vàlid o és negatiu, el torna a demanar.
+    private static double convertirPreu(String linia) {
         while (true) {
-            String linia = sc.nextLine().trim().replace(',', '.');
             try {
-                return Double.parseDouble(linia);
+                double preu = Double.parseDouble(linia.trim().replace(',', '.'));
+                if (preu >= 0) {
+                    return preu;
+                }
             } catch (NumberFormatException e) {
-                System.out.print("Introdueix un número vàlid: ");
+                // es torna a demanar
             }
+            System.out.print("Introdueix un preu vàlid (0 o més): ");
+            linia = sc.nextLine();
+        }
+    }
+
+    // Converteix un text a any de llançament; ha de ser un enter positiu.
+    private static int convertirAny(String linia) {
+        while (true) {
+            try {
+                int any = Integer.parseInt(linia.trim());
+                if (any > 0) {
+                    return any;
+                }
+            } catch (NumberFormatException e) {
+                // es torna a demanar
+            }
+            System.out.print("Introdueix un any vàlid: ");
+            linia = sc.nextLine();
         }
     }
 }
