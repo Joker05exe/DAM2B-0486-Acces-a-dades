@@ -8,3 +8,4 @@ Repositori per a les pràctiques i activitats del mòdul **0486 - Accés a Dades
 - **Pt2**: Xifrat i desxifrat amb inversió de línia, utilitzant `BufferedReader`/`BufferedWriter` i xifrat Cèsar.
 - **Pt3**: Gestió CRUD de videojocs amb persistència binària (`ObjectOutputStream`/`ObjectInputStream`).
 - **Pt4**: Creació i lectura d'arxius XML amb Java (DOM): el zoo virtual.
+- **[Pt5](Pt5/README.md)**: Botiga online amb JDBC i MySQL. Part 1: CRUD de productes i clients.
